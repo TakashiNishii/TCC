@@ -7,6 +7,7 @@ import {
 import Home from './pages/home';
 import './index.css';
 import Modules from './pages/questionsModules';
+import Contents from './pages/contents';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,6 +21,8 @@ root.render(
           <Route index element={<Home />} />
         </Route>
         <Route path="modulos" element={<Modules />}>
+        </Route>
+        <Route path="conteudo" element={<Contents />}>
         </Route>
       </Routes>
     </HashRouter>

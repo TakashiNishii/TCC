@@ -1,18 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Popover, Tab, Transition } from '@headlessui/react'
 import { Squares2X2Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -20,6 +5,7 @@ import { ChevronDownIcon, PlusIcon } from '@heroicons/react/20/solid'
 import Header from '../components/header'
 import linguagemC from '../assets/C.png'
 import Footer from '../components/footer'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 const navigation = {
     categories: [
@@ -567,13 +553,14 @@ export default function Modules() {
                                             <h1 className='text-black text-4xl font-bold '>Semana {module.id}</h1>
                                         </div>
                                         <div className="flex flex-1 flex-col space-y-2 p-4">
-                                            <button
+                                            <Link
                                                 type="button"
                                                 className="inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white bg-[#016FB9] hover:bg-[#016FB9] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                to={'/conteudo'}
                                             >
                                                 <Squares2X2Icon className='h-6 w-6 mr-1' />
                                                 Verificar conteúdo
-                                            </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 ))}
