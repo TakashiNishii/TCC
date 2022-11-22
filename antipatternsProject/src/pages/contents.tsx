@@ -218,16 +218,18 @@ export default function Contents() {
                                 </Disclosure>
                             ))}
                         </dl>
-                        <button
+                        <a
                             type="button"
                             className="inline-flex mt-16 w-full items-center self-end text-center justify-center px-6 py-3 border  text-xl font-medium rounded-xl shadow-sm text-white bg-[#016FB9] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            href={"./docs/SEMANA 1.pdf"}
+                            download={"SEMANA 1.pdf"}
                         >
                             <ArrowDownTrayIcon
                                 className='h-6 w-6 mr-4 transform text-white'
                                 aria-hidden="true"
                             />
                             Download de todo o conteúdo
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
