@@ -16,9 +16,9 @@ export default function Home() {
             <main className="lg:relative">
 
                 <section>
-                    <div className="mx-48 w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
-                        <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
-                            <h1 className="text-4xl font-bold tracking-tight text-center items-center align-middle text-gray-900 sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl">
+                    <div className="mx-48 w-full max-w-7xl  pt-16 pb-20 text-center max-xl:justify-between xl:justify-center  md:mx-0 md:flex lg:py-48 lg:text-left">
+                        <div className="px-4 sm:px-8 sm:w-full md:w-full lg:mr-72 lg:w-1/2 xl:pr-16">
+                            <h1 className="text-4xl font-bold tracking-tight text-center items-center align-middle text-gray-900 sm:text-4xl md:text-4xl  lg:text-4xl xl:text-4xl">
                                 <span className="block xl:inline text-center justify-center items-center self-center">Estude os padrões de equívocos e aprimore sua habilidade de
                                     percebê-los no seu código!</span>
                             </h1>
@@ -26,13 +26,13 @@ export default function Home() {
                                 As linguagens abordadas nos exercícios são C e Python. Com mais de 100 questões de múltipla escolha disponíveis para você
                             </p>
                         </div>
-                    </div>
-                    <div className="relative h-max items-center sm:h-72 md:h-max lg:absolute lg:inset-y-0 lg:right-0 lg:h-fit lg:w-1/2">
-                        <img
-                            className="absolute object-cover"
-                            src={banner}
-                            alt=""
-                        />
+                        <div className="inline sm:hidden md:hidden lg:inline h-max items-center lg:absolute lg:inset-y-0 lg:right-0 lg:h-fit lg:w-1/2">
+                            <img
+                                className="object-cover"
+                                src={banner}
+                                alt=""
+                            />
+                        </div>
                     </div>
                 </section>
 
@@ -63,7 +63,7 @@ export default function Home() {
                                                 />
                                             </div>
                                             <a
-                                                href="#"
+                                                href="/#/modulos"
                                                 className='bg-[#016FB9] self-center text-white mt-8 block w-1/2 py-3 px-6 border border-transparent rounded-md text-center font-medium'
                                             >
                                                 Estudar C
@@ -79,7 +79,8 @@ export default function Home() {
                                                 />
                                             </div>
                                             <a
-                                                href="#"
+                                                //vai para o questionsModules.tsx
+                                                href="/#/modulos"
                                                 className='bg-[#F2763C] self-center text-white mt-8 block w-1/2 py-3 px-6 border border-transparent rounded-md text-center font-medium'
                                             >
                                                 Estudar Python
