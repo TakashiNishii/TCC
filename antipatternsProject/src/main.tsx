@@ -8,6 +8,7 @@ import Home from './pages/home';
 import './index.css';
 import Modules from './pages/questionsModules';
 import Contents from './pages/contents';
+import Contact from './pages/contact';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,6 +24,8 @@ root.render(
         <Route path="modulos" element={<Modules />}>
         </Route>
         <Route path="conteudo" element={<Contents />}>
+        </Route>
+        <Route path="contato" element={<Contact />}>
         </Route>
       </Routes>
     </HashRouter>

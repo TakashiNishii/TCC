@@ -22,13 +22,13 @@ const solutions = [
     {
         name: 'Linguagem C',
         description: 'Veja os nossos exercícios para a linguagem C e os seus padrões de equívocos.',
-        href: '#',
+        href: '#/modulos',
         icon: CommandLineIcon,
     },
     {
         name: 'Linguagem Python',
         description: 'Veja os nossos exercícios para a linguagem Python e os seus padrões de equívocos.',
-        href: '#',
+        href: '#/modulos',
         icon: CodeBracketIcon,
     },
 ]
