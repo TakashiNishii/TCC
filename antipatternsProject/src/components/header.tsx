@@ -1,19 +1,13 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
-    ArrowPathIcon,
     Bars3Icon,
     BookmarkSquareIcon,
     CalendarIcon,
-    ChartBarIcon,
     CodeBracketIcon,
     CommandLineIcon,
-    CursorArrowRaysIcon,
     LifebuoyIcon,
-    PhoneIcon,
-    PlayIcon,
     ShieldCheckIcon,
-    Squares2X2Icon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
@@ -142,14 +136,14 @@ export default function Header() {
                             )}
                         </Popover>
 
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                        <a href="#/contato" className="text-base font-medium text-gray-500 hover:text-gray-900">
                             Dúvidas
                         </a>
                         <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
                             Sobre nós
                         </a>
 
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                        <a href="#/contato" className="text-base font-medium text-gray-500 hover:text-gray-900">
                             Contato
                         </a>
 
