@@ -156,7 +156,7 @@ export default function Contents() {
                             </Link>
                             <h2 className="text-center text-3xl w-full font-bold tracking-tight text-gray-900 sm:text-4xl">
 
-                                Conteúdo abordados na Semana 1
+                                Conteúdos abordados na Semana 1
                             </h2>
                         </div>
 

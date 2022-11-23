@@ -6,6 +6,8 @@ import {
     BookmarkSquareIcon,
     CalendarIcon,
     ChartBarIcon,
+    CodeBracketIcon,
+    CommandLineIcon,
     CursorArrowRaysIcon,
     LifebuoyIcon,
     PhoneIcon,
@@ -18,35 +20,19 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const solutions = [
     {
-        name: 'Analytics',
-        description: 'Get a better understanding of where your traffic is coming from.',
+        name: 'Linguagem C',
+        description: 'Veja os nossos exercícios para a linguagem C e os seus padrões de equívocos.',
         href: '#',
-        icon: ChartBarIcon,
+        icon: CommandLineIcon,
     },
     {
-        name: 'Engagement',
-        description: 'Speak directly to your customers in a more meaningful way.',
+        name: 'Linguagem Python',
+        description: 'Veja os nossos exercícios para a linguagem Python e os seus padrões de equívocos.',
         href: '#',
-        icon: CursorArrowRaysIcon,
-    },
-    { name: 'Security', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
-    {
-        name: 'Integrations',
-        description: "Connect with third-party tools that you're already using.",
-        href: '#',
-        icon: Squares2X2Icon,
-    },
-    {
-        name: 'Automations',
-        description: 'Build strategic funnels that will drive your customers to convert',
-        href: '#',
-        icon: ArrowPathIcon,
+        icon: CodeBracketIcon,
     },
 ]
-const callsToAction = [
-    { name: 'Watch Demo', href: '#', icon: PlayIcon },
-    { name: 'Contact Sales', href: '#', icon: PhoneIcon },
-]
+
 const resources = [
     {
         name: 'Help Center',
@@ -148,19 +134,7 @@ export default function Header() {
                                                         </a>
                                                     ))}
                                                 </div>
-                                                <div className="space-y-6 bg-gray-50 px-5 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
-                                                    {callsToAction.map((item) => (
-                                                        <div key={item.name} className="flow-root">
-                                                            <a
-                                                                href={item.href}
-                                                                className="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100"
-                                                            >
-                                                                <item.icon className="h-6 w-6 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                                <span className="ml-3">{item.name}</span>
-                                                            </a>
-                                                        </div>
-                                                    ))}
-                                                </div>
+
                                             </div>
                                         </Popover.Panel>
                                     </Transition>
