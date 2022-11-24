@@ -21,7 +21,11 @@ root.render(
         <Route path="">
           <Route index element={<Home />} />
         </Route>
-        <Route path="modulos" element={<Modules />}>
+        <Route path="modulos" element={<Modules language={'C'} />}>
+        </Route>
+        <Route path="modulosC" element={<Modules language={'C'} />}>
+        </Route>
+        <Route path="modulosPython" element={<Modules language={'Python'} />}>
         </Route>
         <Route path="conteudo" element={<Contents />}>
         </Route>

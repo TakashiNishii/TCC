@@ -16,13 +16,13 @@ const solutions = [
     {
         name: 'Linguagem C',
         description: 'Veja os nossos exercícios para a linguagem C e os seus padrões de equívocos.',
-        href: '#/modulos',
+        href: '#/modulosC',
         icon: CommandLineIcon,
     },
     {
         name: 'Linguagem Python',
         description: 'Veja os nossos exercícios para a linguagem Python e os seus padrões de equívocos.',
-        href: '#/modulos',
+        href: '#/modulosPython',
         icon: CodeBracketIcon,
     },
 ]
