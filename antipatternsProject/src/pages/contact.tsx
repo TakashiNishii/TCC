@@ -4,7 +4,11 @@ import Footer from '../components/footer'
 import Header from '../components/header'
 
 export default function Contact() {
+    function goToTop() {
+        window.scrollTo(0, 0);
+    }
     return (
+        goToTop(),
         <>
             <Header />
             <div className="relative bg-white">

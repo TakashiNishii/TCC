@@ -26,11 +26,14 @@ const people = [
         twitterUrl: '#',
         linkedinUrl: '#',
     },
-    // More people...
 ]
 
 export default function AboutUs() {
+    function goToTop() {
+        window.scrollTo(0, 0);
+    }
     return (
+        goToTop(),
         <>
             <Header />
             <div className="bg-white">

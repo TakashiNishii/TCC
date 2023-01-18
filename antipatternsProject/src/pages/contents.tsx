@@ -140,7 +140,12 @@ const faqs = [
 ]
 
 export default function Contents() {
+    function goToTop() {
+        window.scrollTo(0, 0);
+    }
+
     return (
+        goToTop(),
         <>
             <Header />
 

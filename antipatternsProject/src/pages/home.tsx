@@ -7,7 +7,11 @@ import Footer from '../components/footer'
 
 
 export default function Home() {
+    function goToTop() {
+        window.scrollTo(0, 0);
+    }
     return (
+        goToTop(),
         <div className="relative bg-white">
             <Popover className="relative bg-[D9D9D9] shadow">
                 <Header />
@@ -63,7 +67,7 @@ export default function Home() {
                                                 />
                                             </div>
                                             <a
-                                                href="/#/modulos"
+                                                href="/#/modulosC"
                                                 className='bg-[#016FB9] self-center text-white mt-8 block w-1/2 py-3 px-6 border border-transparent rounded-md text-center font-medium'
                                             >
                                                 Estudar C
@@ -80,7 +84,7 @@ export default function Home() {
                                             </div>
                                             <a
                                                 //vai para o questionsModules.tsx
-                                                href="/#/modulos"
+                                                href="/#/modulosPython"
                                                 className='bg-[#F2763C] self-center text-white mt-8 block w-1/2 py-3 px-6 border border-transparent rounded-md text-center font-medium'
                                             >
                                                 Estudar Python

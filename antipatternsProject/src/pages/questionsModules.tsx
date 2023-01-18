@@ -56,7 +56,13 @@ export default function Modules(props: Module) {
     const corTexto = linguagem === 'C' ? 'text-[#016FB9]' : 'text-white';
     const corBorder = linguagem === 'C' ? 'border-[#016FB9]' : 'border-[#E26200]';
 
+    //function goToTop()
+    function goToTop() {
+        window.scrollTo(0, 0);
+    }
+
     return (
+        goToTop(),
         <div className="bg-white">
             <div>
                 {/* Mobile menu */}
