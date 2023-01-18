@@ -9,6 +9,7 @@ import './index.css';
 import Modules from './pages/questionsModules';
 import Contents from './pages/contents';
 import Contact from './pages/contact';
+import AboutUs from './pages/aboutUs';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,6 +29,8 @@ root.render(
         <Route path="modulosPython" element={<Modules language={'Python'} />}>
         </Route>
         <Route path="conteudo" element={<Contents />}>
+        </Route>
+        <Route path="sobreNos" element={<AboutUs />}>
         </Route>
         <Route path="contato" element={<Contact />}>
         </Route>
