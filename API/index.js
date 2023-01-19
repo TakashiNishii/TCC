@@ -19,7 +19,13 @@
 
 
         // Update
+        // const semana = await Semana.findByPk(1);
+        // semana.numeroSemana = 01;
 
+        // await semana.save();
+
+        // Delete
+        Semana.destroy({ where: { id: 1 } });
 
         // Read one
         resultados = await Semana.findByPk(1);
