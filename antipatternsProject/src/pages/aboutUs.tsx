@@ -42,8 +42,9 @@ export default function AboutUs() {
                         <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
                             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-center">Quem somos?</h2>
                             <p className="text-xl text-gray-500 text-center">
-                                Odio nisi, lectus dis nulla. Ultrices maecenas vitae rutrum dolor ultricies donec risus sodales. Tempus
-                                quis et.
+                                Somos um grupo de estudantes e professores da UFMS (Universidade Federal de Mato Grosso do Sul) que desenvolvemos essa aplicação como parte do nosso Trabalho de Conclusão de Curso (TCC).
+                                Nosso objetivo é compartilhar com a comunidade os conteúdos que produzimos durante o nosso projeto voltado a padrões de equívoco na aprendizagem de programação.
+                                Esperamos que essa aplicação possa ser útil e contribuir para a disseminação do conhecimento.
                             </p>
                         </div>
                         <ul
