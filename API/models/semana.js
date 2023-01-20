@@ -10,7 +10,8 @@ const Semana = database.define('semana', {
     },
     numeroSemana: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     conteudo: {
         type: Sequelize.STRING,
