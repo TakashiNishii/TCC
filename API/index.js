@@ -25,11 +25,11 @@
         // await semana.save();
 
         // Delete
-        Semana.destroy({ where: { id: 1 } });
+        // Semana.destroy({ where: { id: 1 } });
 
         // Read one
-        resultados = await Semana.findByPk(1);
-        console.log(resultados);
+        // resultados = await Semana.findByPk(1);
+        // console.log(resultados);
     } catch (error) {
         console.log(error);
     }
