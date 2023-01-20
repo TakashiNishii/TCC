@@ -5,15 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/server.js"
+    "start": "nodemon ./bin/server.js",
+    "build": "babel ./src -d ./bin"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel": "^6.23.0",
+    "express": "^4.18.2",
     "sequelize": "^6.28.0",
-    "sqlite3": "^5.1.4",
-    "express": "^4.18.2"
+    "sqlite3": "^5.1.4"
   },
-  "devDependencies": {},
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
 }
