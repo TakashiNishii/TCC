@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Squares2X2Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/20/solid'
@@ -7,39 +7,10 @@ import linguagemC from '../assets/C.png'
 import linguagemPython from '../assets/Python.png'
 import Footer from '../components/footer'
 import { Link } from 'react-router-dom'
+import api from '../services/api'
+import { Semana } from '../models/Semana'
 
-const modules = [
-    {
-        id: 1,
-        name: 'Basic Tee 8-Pack',
-        href: '#',
-    },
-    {
-        id: 2,
-        name: 'Basic Tee',
-        href: '#',
-    },
-    {
-        id: 3,
-        name: 'Basic Tee',
-        href: '#',
-    },
-    {
-        id: 4,
-        name: 'Basic Tee',
-        href: '#',
-    },
-    {
-        id: 5,
-        name: 'Basic Tee',
-        href: '#',
-    },
-    {
-        id: 6,
-        name: 'Basic Tee',
-        href: '#',
-    },
-]
+
 
 interface Module {
     language: string
@@ -48,13 +19,29 @@ interface Module {
 export default function Modules(props: Module) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-    console.log(props.language);
+    const [semanas, setSemanas] = useState<Semana[]>([])
+    const [tipo, setTipo] = useState(String)
+
+    //Por padrão o tipo recebe o valor "Todos"
+    useEffect(() => {
+        setTipo("Todos")
+    }, [])
+
+    useEffect(() => {
+        api.get("/")
+            .then((response) => setSemanas(response.data))
+            .catch((error) => console.log(error))
+    }, [])
+
+
+
     const linguagem = props.language !== undefined ? props.language : 'C';
-    const corPrincipal = linguagem === 'C' ? 'bg-[#016FB9]' : 'bg-[#E26200]';
-    const corHover = linguagem === 'C' ? 'hover:bg-[#016FB9]' : 'hover:bg-[#E26200]';
-    const corSecundaria = linguagem === 'C' ? 'bg-[#B5FFE9]' : 'bg-[#F2763C]';
-    const corTexto = linguagem === 'C' ? 'text-[#016FB9]' : 'text-white';
-    const corBorder = linguagem === 'C' ? 'border-[#016FB9]' : 'border-[#E26200]';
+    const corPrincipal = linguagem === 'C' ? 'bg-[#016FB9] ' : 'bg-[#E26200] ';
+    const corHover = linguagem === 'C' ? 'hover:bg-[#016FB9] ' : 'hover:bg-[#E26200] ';
+    const corSecundaria = linguagem === 'C' ? 'bg-[#B5FFE9] ' : 'bg-[#F2763C] ';
+    const corTexto = linguagem === 'C' ? 'text-[#016FB9] ' : 'text-white ';
+    const corBorder = linguagem === 'C' ? 'border-[#016FB9] ' : 'border-[#E26200] ';
+    const buttonFilter = "inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 "
 
     //function goToTop()
     function goToTop() {
@@ -236,25 +223,29 @@ export default function Modules(props: Module) {
                                         <div className="space-y-4 mt-6 flex-col items-center  sm:flex-col sm:items-center ">
                                             <button
                                                 type="button"
-                                                className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
+                                                className={tipo == 'Todos' ? corPrincipal + buttonFilter + "text-white" : corSecundaria + corTexto + corHover + corBorder + buttonFilter + " hover:text-white"}
+                                                onClick={() => setTipo('Todos')}
                                             >
                                                 Todos
                                             </button>
                                             <button
                                                 type="button"
-                                                className={corSecundaria + " inline-flex w-full items-center text-center justify-center px-6 py-3 border " + corBorder + " text-xl font-medium rounded-xl shadow-sm " + corTexto + " hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " + corHover}
+                                                className={tipo == 'Semântica' ? corPrincipal + buttonFilter + "text-white" : corSecundaria + corTexto + corHover + corBorder + buttonFilter + " hover:text-white"}
+                                                onClick={() => setTipo('Semântica')}
                                             >
                                                 Semântica
                                             </button>
                                             <button
                                                 type="button"
-                                                className={corSecundaria + " inline-flex w-full items-center text-center justify-center px-6 py-3 border " + corBorder + " text-xl font-medium rounded-xl shadow-sm " + corTexto + " hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " + corHover}
+                                                className={tipo == 'Sintaxe' ? corPrincipal + buttonFilter + "text-white" : corSecundaria + corTexto + corHover + corBorder + buttonFilter + " hover:text-white"}
+                                                onClick={() => setTipo('Sintaxe')}
                                             >
                                                 Sintaxe
                                             </button>
                                             <button
                                                 type="button"
-                                                className={corSecundaria + " inline-flex w-full items-center text-center justify-center px-6 py-3 border " + corBorder + " text-xl font-medium rounded-xl shadow-sm " + corTexto + "  hover:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " + corHover}
+                                                className={tipo == 'Estilo' ? corPrincipal + buttonFilter + "text-white" : corSecundaria + corTexto + corHover + corBorder + buttonFilter + " hover:text-white"}
+                                                onClick={() => setTipo('Estilo')}
                                             >
                                                 Estilo
                                             </button>
@@ -270,26 +261,54 @@ export default function Modules(props: Module) {
                             </h2>
 
                             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-                                {modules.map((module) => (
-                                    <div
-                                        key={module.id}
-                                        className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
-                                    >
-                                        <div className="aspect-w-3 aspect-h-4 text-center flex items-center justify-center  bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
-                                            <h1 className='text-black text-4xl font-bold '>Semana {module.id}</h1>
-                                        </div>
-                                        <div className="flex flex-1 flex-col space-y-2 p-4">
-                                            <Link
-                                                type="button"
-                                                className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
-                                                to={'/conteudo'}
+                                {semanas.map((semana) => {
+                                    if (tipo == 'Todos') {
+                                        return (
+                                            <div
+                                                key={semana.id}
+                                                className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
                                             >
-                                                <Squares2X2Icon className='h-6 w-6 mr-1' />
-                                                Verificar conteúdo
-                                            </Link>
-                                        </div>
-                                    </div>
-                                ))}
+                                                <div className="aspect-w-3 aspect-h-4 text-center flex items-center justify-center  bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
+                                                    <h1 className='text-black text-4xl font-bold '>Semana {semana.numeroSemana}</h1>
+                                                </div>
+                                                <div className="flex flex-1 flex-col space-y-2 p-4">
+                                                    <Link
+                                                        type="button"
+                                                        className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
+                                                        to={'/conteudo'}
+                                                    >
+                                                        <Squares2X2Icon className='h-6 w-6 mr-1' />
+                                                        Verificar conteúdo
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        )
+                                    } else {
+                                        //Se na String ter o texto do tipo então retorna
+                                        if (semana.conteudo.includes(tipo)) {
+                                            return (
+                                                <div
+                                                    key={semana.id}
+                                                    className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
+                                                >
+                                                    <div className="aspect-w-3 aspect-h-4 text-center flex items-center justify-center  bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
+                                                        <h1 className='text-black text-4xl font-bold '>Semana {semana.numeroSemana}</h1>
+                                                    </div>
+                                                    <div className="flex flex-1 flex-col space-y-2 p-4">
+                                                        <Link
+                                                            type="button"
+                                                            className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
+                                                            to={'/conteudo'}
+                                                        >
+                                                            <Squares2X2Icon className='h-6 w-6 mr-1' />
+                                                            Verificar conteúdo
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    }
+                                })}
                             </div>
                         </section>
                     </div>
