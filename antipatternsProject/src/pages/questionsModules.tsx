@@ -9,6 +9,7 @@ import Footer from '../components/footer'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
 import { Semana } from '../models/Semana'
+import { Conteudo } from '../models/Conteudo'
 
 
 
@@ -20,20 +21,28 @@ export default function Modules(props: Module) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [semanas, setSemanas] = useState<Semana[]>([])
+    const [conteudo, setConteudo] = useState<Conteudo[]>([])
     const [tipo, setTipo] = useState(String)
+    const [categoria, setCategoria] = useState("Semana")
 
     //Por padrão o tipo recebe o valor "Todos"
     useEffect(() => {
         setTipo("Todos")
+        setCategoria("Semana")
     }, [])
 
     useEffect(() => {
-        api.get("/")
-            .then((response) => setSemanas(response.data))
-            .catch((error) => console.log(error))
-    }, [])
-
-
+        if (categoria === "Semana") {
+            api.get("/")
+                .then((response) => setSemanas(response.data))
+                .catch((error) => console.log(error))
+        } else {
+            api.get("/conteudo")
+                .then((response) => setConteudo(response.data))
+                .catch((error) => console.log(error))
+        }
+    }, [categoria])
+    //Chama a função filtraCategoria() toda vez que a variável categoria for alterada
 
     const linguagem = props.language !== undefined ? props.language : 'C';
     const corPrincipal = linguagem === 'C' ? 'bg-[#016FB9] ' : 'bg-[#E26200] ';
@@ -200,6 +209,10 @@ export default function Modules(props: Module) {
                                                     type="radio"
                                                     defaultChecked={true}
                                                     className="h-6 w-6 border-gray-300 ring-indigo-600  focus:ring-indigo-500"
+                                                    onClick={() => {
+                                                        setCategoria('Semana')
+                                                        console.log(categoria);
+                                                    }}
                                                 />
                                                 <label htmlFor="semana" className="ml-3 block text-base font-medium text-gray-700">
                                                     Semana
@@ -212,6 +225,10 @@ export default function Modules(props: Module) {
                                                     type="radio"
                                                     defaultChecked={false}
                                                     className="h-6 w-6 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    onClick={() => {
+                                                        setCategoria('Conteudo')
+                                                        console.log(categoria);
+                                                    }}
                                                 />
                                                 <label htmlFor="conteudo" className="ml-3 block text-base font-medium text-gray-700">
                                                     Conteúdo
@@ -261,31 +278,9 @@ export default function Modules(props: Module) {
                             </h2>
 
                             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-                                {semanas.map((semana) => {
-                                    if (tipo == 'Todos') {
-                                        return (
-                                            <div
-                                                key={semana.id}
-                                                className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
-                                            >
-                                                <div className="aspect-w-3 aspect-h-4 text-center flex items-center justify-center  bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
-                                                    <h1 className='text-black text-4xl font-bold '>Semana {semana.numeroSemana}</h1>
-                                                </div>
-                                                <div className="flex flex-1 flex-col space-y-2 p-4">
-                                                    <Link
-                                                        type="button"
-                                                        className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
-                                                        to={'/conteudo'}
-                                                    >
-                                                        <Squares2X2Icon className='h-6 w-6 mr-1' />
-                                                        Verificar conteúdo
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        )
-                                    } else {
-                                        //Se na String ter o texto do tipo então retorna
-                                        if (semana.conteudo.includes(tipo)) {
+                                {categoria == 'Semana' ?
+                                    semanas.map((semana) => {
+                                        if (tipo == 'Todos') {
                                             return (
                                                 <div
                                                     key={semana.id}
@@ -306,9 +301,82 @@ export default function Modules(props: Module) {
                                                     </div>
                                                 </div>
                                             )
+                                        } else {
+                                            //Se na String ter o texto do tipo então retorna
+                                            if (semana.conteudo.includes(tipo)) {
+                                                return (
+                                                    <div
+                                                        key={semana.id}
+                                                        className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
+                                                    >
+                                                        <div className="aspect-w-3 aspect-h-4 text-center flex items-center justify-center  bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
+                                                            <h1 className='text-black text-4xl font-bold '>Semana {semana.numeroSemana}</h1>
+                                                        </div>
+                                                        <div className="flex flex-1 flex-col space-y-2 p-4">
+                                                            <Link
+                                                                type="button"
+                                                                className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
+                                                                to={'/conteudo'}
+                                                            >
+                                                                <Squares2X2Icon className='h-6 w-6 mr-1' />
+                                                                Verificar conteúdo
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
                                         }
-                                    }
-                                })}
+                                    })
+                                    :
+                                    conteudo.map((conteudo) => {
+                                        if (tipo == 'Todos') {
+                                            return (
+                                                <div
+                                                    key={conteudo.id}
+                                                    className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
+                                                >
+                                                    <div className="aspect-w-3 aspect-h-4 text-center flex items-center justify-center  bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
+                                                        <h1 className='text-black text-4xl font-bold '>{conteudo.descricao}</h1>
+                                                    </div>
+                                                    <div className="flex flex-1 flex-col space-y-2 p-4">
+                                                        <Link
+                                                            type="button"
+                                                            className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
+                                                            to={'/conteudo'}
+                                                        >
+                                                            <Squares2X2Icon className='h-6 w-6 mr-1' />
+                                                            Verificar conteúdo
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            )
+                                        } else {
+                                            //Se na String ter o texto do tipo então retorna
+                                            if (conteudo.conteudo.includes(tipo)) {
+                                                return (
+                                                    <div
+                                                        key={conteudo.id}
+                                                        className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
+                                                    >
+                                                        <div className="aspect-w-3 aspect-h-4 text-center flex items-center justify-center  bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
+                                                            <h1 className='text-black text-4xl font-bold '>{conteudo.descricao}</h1>
+                                                        </div>
+                                                        <div className="flex flex-1 flex-col space-y-2 p-4">
+                                                            <Link
+                                                                type="button"
+                                                                className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
+                                                                to={'/conteudo'}
+                                                            >
+                                                                <Squares2X2Icon className='h-6 w-6 mr-1' />
+                                                                Verificar conteúdo
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
+                                        }
+                                    })
+                                }
                             </div>
                         </section>
                     </div>
