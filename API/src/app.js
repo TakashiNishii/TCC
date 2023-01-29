@@ -3,7 +3,8 @@ const app = express();
 const router = express.Router();
 //Rotas
 const index = require('./routes/index');
-const personRoute = require('./routes/personRoute');
+const conteudoRoute = require('./routes/conteudo');
+
 const cors = require('cors');
 const corsOptions = {
     origin: '*',
@@ -12,5 +13,5 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 app.use('/', index);
-app.use('/persons', personRoute);
+app.use('/conteudo', conteudoRoute);
 module.exports = app;

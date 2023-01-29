@@ -1,6 +1,6 @@
 (async () => {
     const database = require('./db');
-    const Semana = require('./models/semana');
+    const Conteudo = require('./models/conteudo');
 
     try {
         const resultado = await database.sync();
