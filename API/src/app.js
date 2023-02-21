@@ -4,6 +4,7 @@ const router = express.Router();
 //Rotas
 const index = require('./routes/index');
 const conteudoRoute = require('./routes/conteudo');
+const questoesRoute = require('./routes/questoes');
 
 const cors = require('cors');
 const corsOptions = {
@@ -14,4 +15,5 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use('/', index);
 app.use('/conteudo', conteudoRoute);
+app.use('/questoes', questoesRoute);
 module.exports = app;

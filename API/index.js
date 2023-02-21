@@ -1,19 +1,22 @@
 (async () => {
     const database = require('./db');
-    const Conteudo = require('./models/conteudo');
+    const Questoes = require('./models/questoes');
 
     try {
         const resultado = await database.sync();
         console.log(resultado);
 
         // Create
-        // const resultadoCreate = await Semana.create({
-        //     numeroSemana: 1,
-        //     conteudo: 'Estilo;Semântica'
-        // });
+        const resultadoCreate = await Questoes.create({
+            idQuestao: '1',
+            titulo: 'Teste',
+            descricao: 'Teste',
+            conteudo: 'Teste',
+            semana: 'Teste',
+        });
 
         // Read all
-        var resultados = await Semana.findAll();
+        var resultados = await Questoes.findAll();
         console.log(resultados);
 
 
