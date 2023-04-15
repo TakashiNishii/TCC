@@ -293,7 +293,7 @@ export default function Modules(props: Module) {
                                                         <Link
                                                             type="button"
                                                             className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
-                                                            to={'/conteudo'}
+                                                            to={'/conteudo?linguagem=' + linguagem + '&semana=' + semana.numeroSemana}
                                                         >
                                                             <Squares2X2Icon className='h-6 w-6 mr-1' />
                                                             Verificar conteúdo
@@ -316,7 +316,7 @@ export default function Modules(props: Module) {
                                                             <Link
                                                                 type="button"
                                                                 className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
-                                                                to={'/conteudo'}
+                                                                to={'/conteudo?linguagem=' + linguagem + '&semana=' + semana.numeroSemana}
                                                             >
                                                                 <Squares2X2Icon className='h-6 w-6 mr-1' />
                                                                 Verificar conteúdo
@@ -342,7 +342,7 @@ export default function Modules(props: Module) {
                                                         <Link
                                                             type="button"
                                                             className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
-                                                            to={'/conteudo'}
+                                                            to={'/conteudo?linguagem=' + linguagem + '&conteudo=' + conteudo.sigla+ '&descricao='+ conteudo.descricao}
                                                         >
                                                             <Squares2X2Icon className='h-6 w-6 mr-1' />
                                                             Verificar conteúdo
@@ -365,7 +365,7 @@ export default function Modules(props: Module) {
                                                             <Link
                                                                 type="button"
                                                                 className={corPrincipal + " inline-flex w-full items-center text-center justify-center px-6 py-3 border border-transparent text-xl font-medium rounded-xl shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
-                                                                to={'/conteudo'}
+                                                                to={'/conteudo?linguagem=' + linguagem + '&conteudo=' + conteudo.sigla+ '&descricao='+ conteudo.descricao}
                                                             >
                                                                 <Squares2X2Icon className='h-6 w-6 mr-1' />
                                                                 Verificar conteúdo

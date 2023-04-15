@@ -7,13 +7,16 @@
         console.log(resultado);
 
         // Create
-        const resultadoCreate = await Questoes.create({
+        const resultadoCreate =  Questoes.create({
             idQuestao: '1',
             titulo: 'Teste',
             descricao: 'Teste',
             conteudo: 'Teste',
             semana: 'Teste',
+            alternativas: 'Teste',
+            antipadrao: 'Teste'
         });
+        
 
         // Read all
         var resultados = await Questoes.findAll();

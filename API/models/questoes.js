@@ -29,6 +29,19 @@ const Questoes = database.define('questoes', {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    alternativas: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    antipadrao: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    linguagem: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
 },);
 
 

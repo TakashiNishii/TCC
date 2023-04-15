@@ -13,24 +13,26 @@ router.get('/', async function (req, res, next) {
     );
 });
 
-router.get('/semana/:semana', async function (req, res, next) {
+router.get('/semana/:semana/:linguagem', async function (req, res, next) {
     var resultados = await Questoes.findAll({
         where: {
-            // semana like %:semana%
-            semana: { [Op.like]: '%' + req.params.semana + '%' }
+            semana:  { [Op.like]: '%' +req.params.semana+"%" } ,
+            linguagem: { [Op.like]: '%' +req.params.linguagem+"%"} // adicionado o parâmetro "linguagem" na consulta
         }
     });
     res.status(200).send(
         resultados
     );
-    //Para chamar essa rota, basta digitar no navegador: http://localhost:3000/questoes/1
+    // Para chamar essa rota, basta digitar no navegador: http://localhost:3000/semana/1/javascript
 });
 
-router.get('/conteudo/:conteudo', async function (req, res, next) {
+
+router.get('/conteudo/:conteudo/:linguagem', async function (req, res, next) {
     var resultados = await Questoes.findAll({
         where: {
             // conteudo like %:conteudo%
-            conteudo: { [Op.like]: '%' + req.params.conteudo + '%' }
+            conteudo: { [Op.like]: '%' + req.params.conteudo + '%' },
+            linguagem: { [Op.like]: '%' +req.params.linguagem+"%"}
         }
     });
     res.status(200).send(
