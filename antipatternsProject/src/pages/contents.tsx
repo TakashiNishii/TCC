@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react'
-import { ArrowDownTrayIcon, ChevronDownIcon, ChevronLeftIcon, EyeDropperIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { ArrowDownTrayIcon, ChevronLeftIcon, EyeDropperIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import { Link, useLocation } from 'react-router-dom'
 import Footer from '../components/footer'
 import Header from '../components/header'
@@ -7,15 +7,14 @@ import Header from '../components/header'
 import api from '../services/api'
 import { useEffect, useState } from 'react'
 import { Questoes } from '../models/Questoes'
-import { Conteudo } from '../models/Conteudo'
 
-
-
+import { PDFDocument } from 'pdf-lib';
+import axios from 'axios';
+import { saveAs } from 'file-saver';
 
 
 export default function Contents() {
     const [questoes, setQuestoes] = useState<Questoes[]>([])
-    
     
     function goToTop() {
         window.scrollTo(0, 0);
@@ -28,9 +27,9 @@ export default function Contents() {
     const semana = params.get("semana");
     const conteudo = params.get("conteudo");
     const descricaoConteudo = params.get("descricao");
+    var urls = [''];
 
     useEffect(() => {
-        console.log(linguagem, semana, conteudo);
         if(semana != null){
             api.get("/questoes/semana/"+semana+"/"+linguagem)
             .then((response) => setQuestoes(response.data))
@@ -38,13 +37,32 @@ export default function Contents() {
         }else{
             api.get("/questoes/conteudo/"+conteudo+"/"+linguagem)
             .then((response) => setQuestoes(response.data))
-            .catch((error) => console.log(error))
-            
-        } 
+            .catch((error) => console.log(error))  
+        }
+        
     }, []);
 
-    
+    async function mergePDFsFromUrls(urls: string[]) {
+        urls = questoes.map((faq) => "./docs/" + faq.idQuestao + ".pdf");
+        console.log(urls)
 
+        const pdfs = await Promise.all(urls.map(url => axios.get(url, {responseType: 'arraybuffer'})));
+        const pdfDoc = await PDFDocument.create();
+        for (let pdfBytes of pdfs) {
+          const pdf = await PDFDocument.load(pdfBytes.data);
+          const copiedPages = await pdfDoc.copyPages(pdf, pdf.getPageIndices());
+          copiedPages.forEach((page: any) => pdfDoc.addPage(page));
+        }
+        return await pdfDoc.save();
+      }
+
+      async function downloadAllContent() {
+        mergePDFsFromUrls(urls).then((result) => {
+            // download result
+            const blob = new Blob([result], { type: 'application/pdf' });
+            saveAs(blob, semana? "semana "+semana+".pdf" : descricaoConteudo+".pdf");
+          });
+      }    
 
     return (
         goToTop(),
@@ -108,7 +126,7 @@ export default function Contents() {
                                             <Disclosure.Panel as="dd" className="mt-4 bg-white py-4 flex flex-col items-center">
                                                 <h3 className="text-lg font-medium text-gray-900"> {faq.titulo}</h3>
                                                 <p className="text-base text-black">{faq.descricao}</p>
-                                                <img src={"./" + faq.idQuestao + ".png"} className="self-center pt-8" />
+                                                <img src={"./" + faq.idQuestao + ".jpg"} className="self-center pt-8" />
                                                 <div className="flex flex-col items-center">
                                                     <h3 className="text-lg font-medium text-gray-900">Alternativas</h3>
                                                     <div className="flex flex-col items-start">
@@ -125,18 +143,17 @@ export default function Contents() {
                                 </Disclosure>
                             ))}
                         </dl>
-                        <a
+                        <button
                             type="button"
                             className="inline-flex mt-16 w-full items-center self-end text-center justify-center px-6 py-3 border  text-xl font-medium rounded-xl shadow-sm text-white bg-[#016FB9] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            href={"./docs/SEMANA 1.pdf"}
-                            download={"SEMANA 1.pdf"}
+                            onClick={downloadAllContent}
                         >
                             <ArrowDownTrayIcon
                                 className='h-6 w-6 mr-4 transform text-white'
                                 aria-hidden="true"
                             />
                             Download de todo o conteúdo
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
